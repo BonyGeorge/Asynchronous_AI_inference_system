@@ -5,7 +5,6 @@ import sys, os, json
 
 # Ensure src/ is on path
 sys.path.append(os.path.join(os.path.dirname(__file__), "../src"))
-\
 
 from ml_pipeline.data import generate_data, load_data
 from ml_pipeline.model import train_model, evaluate_model, promote_model
@@ -13,9 +12,9 @@ from ml_pipeline.model import train_model, evaluate_model, promote_model
 default_args = {"owner": "airflow", "retries": 1}
 
 with DAG(
-    dag_id="ml_training_pipeline_v2",
+    dag_id="ml_training_pipeline",
     default_args=default_args,
-    description="Pipeline: Train Model -> Evaluate Model -> Promote Model",
+    description="Pipeline: Generate Data -> Train Model -> Evaluate Model -> Promote Model",
     schedule_interval=None,
     start_date=datetime(2025, 1, 1),
     catchup=False,

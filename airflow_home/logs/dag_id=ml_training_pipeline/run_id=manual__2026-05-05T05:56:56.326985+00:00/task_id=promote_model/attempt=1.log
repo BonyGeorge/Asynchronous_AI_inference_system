@@ -1,0 +1,206 @@
+[2026-05-05T05:57:11.467+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-05-05T05:57:11.475+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_training_pipeline.promote_model manual__2026-05-05T05:56:56.326985+00:00 [queued]>
+[2026-05-05T05:57:11.480+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_training_pipeline.promote_model manual__2026-05-05T05:56:56.326985+00:00 [queued]>
+[2026-05-05T05:57:11.480+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2026-05-05T05:57:11.491+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): promote_model> on 2026-05-05 05:56:56.326985+00:00
+[2026-05-05T05:57:11.496+0000] {standard_task_runner.py:72} INFO - Started process 8127 to run task
+[2026-05-05T05:57:11.499+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'ml_training_pipeline', 'promote_model', 'manual__2026-05-05T05:56:56.326985+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmpjh5fyu_9']
+[2026-05-05T05:57:11.500+0000] {standard_task_runner.py:105} INFO - Job 7: Subtask promote_model
+[2026-05-05T05:57:11.528+0000] {task_command.py:467} INFO - Running <TaskInstance: ml_training_pipeline.promote_model manual__2026-05-05T05:56:56.326985+00:00 [running]> on host ip-172-31-93-78.ec2.internal
+[2026-05-05T05:57:11.577+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_training_pipeline' AIRFLOW_CTX_TASK_ID='promote_model' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T05:56:56.326985+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T05:56:56.326985+00:00'
+[2026-05-05T05:57:11.578+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-05-05T05:57:11.719+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/dags/ml_pipeline_dag.py", line 71, in promote_model_wrapper
+    promote_model(model_version=model_version, s3=s3, base_path=base_path)
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/dags/../src/ml_pipeline/model.py", line 117, in promote_model
+    s3.upload_file(model_path, bucket_name, s3_prefix + "model.pkl")
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/boto3/s3/inject.py", line 145, in upload_file
+    return transfer.upload_file(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/boto3/s3/transfer.py", line 372, in upload_file
+    future.result()
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/futures.py", line 103, in result
+    return self._coordinator.result()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/futures.py", line 264, in result
+    raise self._exception
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/tasks.py", line 135, in __call__
+    return self._execute_main(kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/tasks.py", line 158, in _execute_main
+    return_value = self._main(**kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/upload.py", line 762, in _main
+    client.put_object(Bucket=bucket, Key=key, Body=body, **extra_args)
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/client.py", line 569, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/client.py", line 1005, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/client.py", line 1029, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+               ^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/signers.py", line 106, in handler
+    return self.sign(operation_name, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/signers.py", line 198, in sign
+    auth.add_auth(request)
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/auth.py", line 423, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials
+[2026-05-05T05:57:11.742+0000] {taskinstance.py:1225} INFO - Marking task as UP_FOR_RETRY. dag_id=ml_training_pipeline, task_id=promote_model, run_id=manual__2026-05-05T05:56:56.326985+00:00, execution_date=20260505T055656, start_date=20260505T055711, end_date=20260505T055711
+[2026-05-05T05:57:11.754+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-05-05T05:57:11.754+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 7 for task promote_model (Unable to locate credentials; 8127)
+Traceback (most recent call last):
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/dags/ml_pipeline_dag.py", line 71, in promote_model_wrapper
+    promote_model(model_version=model_version, s3=s3, base_path=base_path)
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/dags/../src/ml_pipeline/model.py", line 117, in promote_model
+    s3.upload_file(model_path, bucket_name, s3_prefix + "model.pkl")
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/boto3/s3/inject.py", line 145, in upload_file
+    return transfer.upload_file(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/boto3/s3/transfer.py", line 372, in upload_file
+    future.result()
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/futures.py", line 103, in result
+    return self._coordinator.result()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/futures.py", line 264, in result
+    raise self._exception
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/tasks.py", line 135, in __call__
+    return self._execute_main(kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/tasks.py", line 158, in _execute_main
+    return_value = self._main(**kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/s3transfer/upload.py", line 762, in _main
+    client.put_object(Bucket=bucket, Key=key, Body=body, **extra_args)
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/client.py", line 569, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/client.py", line 1005, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/client.py", line 1029, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+               ^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/signers.py", line 106, in handler
+    return self.sign(operation_name, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/signers.py", line 198, in sign
+    auth.add_auth(request)
+  File "/home/ec2-user/environment/Asynchronous_AI_inference_system/venv/lib64/python3.12/site-packages/botocore/auth.py", line 423, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials
+[2026-05-05T05:57:11.765+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2026-05-05T05:57:11.775+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-05-05T05:57:11.775+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
