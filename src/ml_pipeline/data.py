@@ -14,4 +14,8 @@ def generate_data(output_path: str = "data/breast_cancer.csv") -> str:
 
 def load_data(data_path: str = "data/breast_cancer.csv") -> pd.DataFrame:
     """Load dataset from CSV into a dataframe."""
-    return pd.read_csv(data_path)   
+    return pd.read_csv(data_path) 
+    
+def load_test_data(data_path: str = "data/test_features.csv") -> pd.DataFrame:
+    """Load test dataset from CSV into a dataframe."""
+    return pd.read_csv(data_path) 

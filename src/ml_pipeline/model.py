@@ -4,10 +4,9 @@ import json
 import datetime
 import pytz
 import boto3
+import pandas as pd
 
 from zoneinfo import ZoneInfo
-
-import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -24,6 +23,11 @@ def train_model(df: pd.DataFrame, model_path: str = "models/breast_cancer_model.
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
+    
+    test_data_path = "data/test_features.csv"
+    os.makedirs(os.path.dirname(test_data_path), exist_ok=True)
+    X_test.to_csv(test_data_path, index=False)
+    print(f"[ml_pipeline.model] Saved test features to {test_data_path}")
 
     clf = LogisticRegression(max_iter=200)
     clf.fit(X_train, y_train)

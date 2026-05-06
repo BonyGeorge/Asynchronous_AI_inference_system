@@ -24,6 +24,13 @@
         "model_version": "20260505_010840",
         "dataset": "breast_cancer",
         "model_type": "logistic_regression",
+        "status": "archived",
+        "accuracy": 0.956140350877193
+    },
+    {
+        "model_version": "20260505_230620",
+        "dataset": "breast_cancer",
+        "model_type": "logistic_regression",
         "status": "production",
         "accuracy": 0.956140350877193
     }
