@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-consumer-deployment
+  labels:
+    app: ai-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-consumer
+  template:
+    metadata:
+      labels:
+        app: ai-consumer
+    spec:
+      containers:
+      - name: ai-consumer-container
+        image: ai-consumer-app:latest
+        imagePullPolicy: Never
+        env:
+        
+        # Environment variables
+        - name: QUEUE_NAME
+          value: "ml_pipeline_queue"
+        - name: S3_BUCKET
+          value: "async-ai-inf"
+        - name: MODEL_KEY
+          value: "models/20260505_230620/model.pkl"
+        
+        # AWS Credentials so the pod can talk to SQS and S3
+        - name: AWS_ACCESS_KEY_ID
+          value: "YOUR_ACCESS_KEY_HERE"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "YOUR_SECRET_KEY_HERE"
+        - name: AWS_SESSION_TOKEN
+          value: "YOUR_SESSION_TOKEN_HERE"
+        - name: AWS_DEFAULT_REGION
+          value: "us-east-1"
