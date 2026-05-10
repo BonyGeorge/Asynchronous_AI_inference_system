@@ -51,7 +51,7 @@ Asynchronous_AI_inference_system/
 
 Ensure you have created the following resources in your AWS account:
 
-- An S3 Bucket (e.g., `async-ai-inf`)
+- An S3 Bucket named `async-ai-inf`
 - An SQS Queue named `ml_pipeline_queue`
 
 ---
