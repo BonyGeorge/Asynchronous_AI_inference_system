@@ -23,18 +23,41 @@ The system is decoupled into three primary components:
 ```text
 Asynchronous_AI_inference_system/
 │
-├── airflow_home/                # Airflow DAGs and logs
-│   └── dags/
-│       ├── model_training.py    # Trains model and uploads to S3
-│       └── populate_queue.py    # Pushes test data to SQS
+├── airflow_home/
 │
-├── src/app/
-│   └── consumer.py              # Main Python consumer application
+├── dags/
+│   ├── .airflowignore
+│   ├── ml_pipeline_dag.py
+│   └── msg_sqs_dag.py
 │
-├── Dockerfile                   # Docker image blueprint for the consumer
-├── requirements.txt             # Python dependencies (boto3, scikit-learn, etc.)
-├── consumer-deployment.yaml     # Kubernetes deployment configuration
-└── README.md                    # Project documentation
+├── data/
+│   ├── breast_cancer.csv
+│   └── test_features.csv
+│
+├── models/
+│
+├── scripts/
+│   ├── generate_data.py
+│   └── train_model.py
+│
+├── src/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   └── consumer.py
+│   │
+│   └── ml_pipeline/
+│       ├── __init__.py
+│       ├── data.py
+│       ├── model.py
+│       └── sqs_publisher.py
+│
+├── .gitignore
+├── consumer-deployment.yaml
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── requirements.txt
+└── setup_airflow.sh         
 ```
 ## 🚀 Setup and Execution
 
