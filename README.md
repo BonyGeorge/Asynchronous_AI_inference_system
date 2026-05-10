@@ -36,9 +36,9 @@ Asynchronous_AI_inference_system/
 ├── consumer-deployment.yaml     # Kubernetes deployment configuration
 └── README.md                    # Project documentation
 ```
-# 🚀 Setup and Execution
+## 🚀 Setup and Execution
 
-## 1. Prerequisites
+### 1. Prerequisites
 
 - Python 3.12+
 - Docker installed and running
@@ -47,7 +47,7 @@ Asynchronous_AI_inference_system/
 
 ---
 
-## 2. AWS Configuration
+### 2. AWS Configuration
 
 Ensure you have created the following resources in your AWS account:
 
@@ -56,7 +56,7 @@ Ensure you have created the following resources in your AWS account:
 
 ---
 
-## 3. Orchestration (Apache Airflow)
+### 3. Orchestration (Apache Airflow)
 
 1. Start your Airflow webserver and scheduler.
 2. Trigger the **Model Training DAG** to generate and upload `model.pkl` to your S3 bucket.
@@ -64,22 +64,22 @@ Ensure you have created the following resources in your AWS account:
 
 ---
 
-## 4. Deploying the Consumer to Kubernetes
+### 4. Deploying the Consumer to Kubernetes
 
-### Start your local Minikube cluster
+#### Start your local Minikube cluster
 
 ```bash
 minikube start --driver=docker
 ```
 
-### Build the Docker image and load it into Minikube's registry
+#### Build the Docker image and load it into Minikube's registry
 
 ```bash
 docker build -t ai-consumer-app:latest .
 minikube image load ai-consumer-app:latest
 ```
 
-### Update the deployment configuration
+#### Update the deployment configuration
 
 Update the `consumer-deployment.yaml` file with:
 
@@ -92,7 +92,7 @@ Then apply the deployment:
 kubectl apply -f consumer-deployment.yaml
 ```
 
-### Monitor the consumer logs
+#### Monitor the consumer logs
 
 ```bash
 kubectl logs -l app=ai-consumer -f
@@ -100,7 +100,7 @@ kubectl logs -l app=ai-consumer -f
 
 ---
 
-# 📈 Scaling the System
+## 📈 Scaling the System
 
 This architecture is designed to handle massive spikes in inference requests.
 
@@ -110,7 +110,7 @@ To scale the system horizontally, increase the number of consumer replicas in Ku
 kubectl scale deployment ai-consumer-deployment --replicas=3
 ```
 
-### Verify the pods are running concurrently
+#### Verify the pods are running concurrently
 
 ```bash
 kubectl get pods
@@ -118,7 +118,7 @@ kubectl get pods
 
 ---
 
-# 📄 Output Format
+## 📄 Output Format
 
 For every message processed, the consumer writes a unique JSON file back to the `predictions/` folder in the S3 bucket.
 
