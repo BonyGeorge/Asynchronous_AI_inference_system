@@ -63,9 +63,9 @@ Asynchronous_AI_inference_system/
 
 ### 1. Prerequisites
 
-- Python 3.12+
+- Python 3.12
 - Docker installed and running
-- Minikube and `kubectl` installed
+- `Minikube` and `kubectl` installed
 - Active AWS credentials with access to S3 and SQS
 
 ---
